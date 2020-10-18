@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangEasy.Naming.UniqueName", "DangEasy.Naming.UniqueName.csproj", "{64ED33E7-8F0A-438C-8B2C-D26AAE1F5B81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{81C0B1D5-295B-4D43-8C46-2AE67C3A0E02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DangEasy.Naming.UniqueName.Test", "..\..\test\DangEasy.Naming.UniqueName.Test\DangEasy.Naming.UniqueName.Test.csproj", "{847A9BF6-0A6B-4C76-9372-A2EAA22D6E34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64ED33E7-8F0A-438C-8B2C-D26AAE1F5B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64ED33E7-8F0A-438C-8B2C-D26AAE1F5B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64ED33E7-8F0A-438C-8B2C-D26AAE1F5B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64ED33E7-8F0A-438C-8B2C-D26AAE1F5B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{847A9BF6-0A6B-4C76-9372-A2EAA22D6E34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{847A9BF6-0A6B-4C76-9372-A2EAA22D6E34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{847A9BF6-0A6B-4C76-9372-A2EAA22D6E34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{847A9BF6-0A6B-4C76-9372-A2EAA22D6E34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{847A9BF6-0A6B-4C76-9372-A2EAA22D6E34} = {81C0B1D5-295B-4D43-8C46-2AE67C3A0E02}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14299372-E7D4-4C34-8E72-E2E6651A1F4C}
+	EndGlobalSection
+EndGlobal
