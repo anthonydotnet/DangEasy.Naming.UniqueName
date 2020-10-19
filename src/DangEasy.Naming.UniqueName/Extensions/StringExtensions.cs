@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DangEasy.Naming.UniqueName
+namespace DangEasy.Naming.UniqueName.Extensions
 {
     public static class StringExtensions
     {

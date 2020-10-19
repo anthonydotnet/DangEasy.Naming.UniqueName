@@ -1,4 +1,6 @@
 ﻿using DangEasy.Naming.UniqueName.Constants;
+using DangEasy.Naming.UniqueName.Extensions;
+using DangEasy.Naming.UniqueName.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +18,7 @@ namespace DangEasy.Naming.UniqueName
                     .Select(x => new StructuredName(x));
 
             // name is empty, and there are no other names with suffixes, so just return " (1)"
-            if (model.NameIsEmpty() && !items.Any())
+            if (model.IsEmptyName() && !items.Any())
             {
                 model.SetSuffix(1);
 
@@ -24,7 +26,7 @@ namespace DangEasy.Naming.UniqueName
             }
 
             // name is empty, and there are other names with suffixes
-            if (model.NameIsEmpty() && SuffixedNameExists(items)) // items.Any())
+            if (model.IsEmptyName() && items.SuffixedNameExists()) 
             {
                 var emptyNameSuffix = GetSuffixNumber(items);
 
@@ -37,7 +39,7 @@ namespace DangEasy.Naming.UniqueName
             }
 
             //  no suffix - name without suffix does NOT exist, AND name with suffix does NOT exist
-            if (!model.HasSuffix() && !SimpleNameExists(items, model.Text) && !SuffixedNameExists(items))
+            if (!model.HasSuffix() && !items.SimpleNameExists(model.Text) && !items.SuffixedNameExists())
             {
                 model.SetNoSuffix();
 
@@ -45,7 +47,7 @@ namespace DangEasy.Naming.UniqueName
             }
 
             // no suffix - name without suffix exists, however name with suffix does NOT exist
-            if (!model.HasSuffix() && SimpleNameExists(items, model.Text) && !SuffixedNameExists(items))
+            if (!model.HasSuffix() && items.SimpleNameExists(model.Text) && !items.SuffixedNameExists())
             {
                 var firstSuffix = GetFirstSuffix(items);
                 model.SetSuffix(firstSuffix);
@@ -54,7 +56,7 @@ namespace DangEasy.Naming.UniqueName
             }
 
             // no suffix - name without suffix exists, AND name with suffix does exist
-            if (!model.HasSuffix() && SimpleNameExists(items, model.Text) && SuffixedNameExists(items))
+            if (!model.HasSuffix() && items.SimpleNameExists(model.Text) && items.SuffixedNameExists())
             {
                 var nextSuffix = GetSuffixNumber(items);
                 model.SetSuffix(nextSuffix);
@@ -63,7 +65,7 @@ namespace DangEasy.Naming.UniqueName
             }
 
             // no suffix - name without suffix does NOT exist, however name with suffix exists
-            if (!model.HasSuffix() && !SimpleNameExists(items, model.Text) && SuffixedNameExists(items))
+            if (!model.HasSuffix() && !items.SimpleNameExists(model.Text) && items.SuffixedNameExists())
             {
                 var nextSuffix = GetSuffixNumber(items);
                 model.SetSuffix(nextSuffix);
@@ -72,7 +74,7 @@ namespace DangEasy.Naming.UniqueName
             }
 
             // has suffix - name without suffix exists
-            if (model.HasSuffix() && SimpleNameExists(items, model.Text))
+            if (model.HasSuffix() && items.SimpleNameExists(model.Text))
             {
                 var nextSuffix = GetSuffixNumber(items);
                 model.SetSuffix(nextSuffix);
@@ -81,8 +83,8 @@ namespace DangEasy.Naming.UniqueName
             }
 
             // has suffix - name without suffix does NOT exist
-            // this is a case where the user added the suffix, so we need to add a secondary suffix
-            if (model.HasSuffix() && items.Count() == 1 && Contains(items, model)) // this is wrong!!!
+            // a case where the user added the suffix, so add a secondary suffix
+            if (model.HasSuffix() && !items.SimpleNameExists(model.Text))
             {
                 model.SetText(model.FullName);
                 model.SetNoSuffix();
@@ -95,12 +97,9 @@ namespace DangEasy.Naming.UniqueName
                 return model.FullName;
             }
 
-            // TODO: we need to determine how to increment a multi-suffix, not just add a secondary one???
-
-            if (model.HasSuffix() && !SimpleNameExists(items, model.Text))
+            // has suffix - name without suffix also exists, therefore we simply increment
+            if (model.HasSuffix() && items.SimpleNameExists(model.Text))
             {
-                // in this case, we have an increament... so we need to detect it in names, then use that item.Text instead of model.Text
-
                 var nextSuffix = GetSuffixNumber(items);
                 model.SetSuffix(nextSuffix);
 
@@ -110,22 +109,7 @@ namespace DangEasy.Naming.UniqueName
             return name;
         }
 
-        private static bool Contains(IEnumerable<StructuredName> items, StructuredName model)
-        {
-            return items.Any(x => x.FullName.InvariantEquals(model.FullName));
-        }
 
-        private static bool SimpleNameExists(IEnumerable<StructuredName> items, string name)
-        {
-            return items.Any(x => !x.HasSuffix());
-
-            //   return items.Any(x => x.FullName.InvariantEquals(name));
-        }
-
-        private static bool SuffixedNameExists(IEnumerable<StructuredName> items)
-        {
-            return items.Any(x => x.HasSuffix());
-        }
 
         private static int GetFirstSuffix(IEnumerable<StructuredName> items)
         {

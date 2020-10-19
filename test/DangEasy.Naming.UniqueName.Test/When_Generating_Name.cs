@@ -73,7 +73,7 @@ namespace DangEasy.Naming.UniqueName.Test
             };
 
             // in this case the "real" name is "Test (1)"
-            var res = NameGenerator.GetUniqueName(names, "Test (1)");
+            var res = NameGenerator.GetUniqueName(names, "Test (1) (1)");
 
             Assert.Equal("Test (1) (2)", res);
         }

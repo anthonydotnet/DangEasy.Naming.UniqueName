@@ -1,7 +1,7 @@
 ﻿using DangEasy.Naming.UniqueName.Constants;
 using System.Text.RegularExpressions;
 
-namespace DangEasy.Naming.UniqueName
+namespace DangEasy.Naming.UniqueName.Models
 {
         internal class StructuredName
         {
@@ -65,7 +65,7 @@ namespace DangEasy.Naming.UniqueName
                 Text = text;
             }
 
-            internal bool NameIsEmpty()
+            internal bool IsEmptyName()
             {
                 return string.IsNullOrWhiteSpace(Text);
             }
